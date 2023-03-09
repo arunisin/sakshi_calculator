@@ -61,7 +61,7 @@ const Calculator = () => {
 
     const switchToNextInput = (e)=>{
         console.log(e)
-        if(e.key=='Enter'){
+        if(e.key==='Enter'){
             //e.preventDefault();
             switch(e.target){
                 case odInputRef.current:
@@ -69,6 +69,8 @@ const Calculator = () => {
                     break;
                 case dilutionInputRef.current:
                     calculateRef.current.click()
+                    break;
+                default:
                     break;
             } 
         }
@@ -78,10 +80,8 @@ const Calculator = () => {
         setMethod(e.value);
     }
 
-    useEffect(()=>{
-        if(od !== '' && dilutionFactor !== ''){
+    useEffect(()=>{  
             calcFinVal()
-        }
     },[method])
     
 
