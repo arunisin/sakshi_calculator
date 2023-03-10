@@ -12,6 +12,7 @@ const Calculator = () => {
         'Nitrate Nitrogen'
     ]
 
+    
     const [method,setMethod]= useState(drop_options[0])
     const [od,setOd] = useState('')
     const [dilutionFactor,setDilutionFactor] = useState('')
@@ -19,6 +20,7 @@ const Calculator = () => {
     const [showFinVal,setShowFinVal] = useState(false)
     const decimalPlaces = 3;
 
+    const isMountedRef = useRef(false)
     const dilutionInputRef = useRef(null);
     const odInputRef = useRef(null);
     const calculateRef = useRef(null);
@@ -78,10 +80,16 @@ const Calculator = () => {
 
     const dropdownSelection = (e)=>{
         setMethod(e.value);
+        
     }
 
     useEffect(()=>{  
-            calcFinVal()
+        if(isMountedRef.current){
+            if(od !== '' && dilutionFactor !== '')calcFinVal()
+        }
+        else{
+            isMountedRef.current= true;
+        }         
     },[method])
     
 
